@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cw8hvcfg7q5ms"]
+
+[ext_resource type="Texture2D" uid="uid://bpiq2tyquev0y" path="res://Assets/Fifica.png" id="1_qvqgk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(19.168602, 120)
+
+[node name="Defender" type="CharacterBody2D" unique_id=982291588]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=427989961]
+texture = ExtResource("1_qvqgk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1666193597]
+scale = Vector2(1.043373, 1)
+shape = SubResource("RectangleShape2D_cvnsp")

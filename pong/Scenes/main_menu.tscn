@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bi08mwvmdg0ff"]
+
+[ext_resource type="Script" uid="uid://c668rqkqiuvrf" path="res://Script/main_menu.gd" id="1_1ehe0"]
+[ext_resource type="Texture2D" uid="uid://cicego0clb86n" path="res://Assets/Footpong.png.png" id="1_48xlc"]
+[ext_resource type="FontFile" uid="uid://dhlcrj2livg4t" path="res://Assets/PublicPixel-rv0pA.ttf" id="2_1ehe0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
+texture = ExtResource("1_48xlc")
+modulate_color = Color(0.29954746, 0.29954746, 0.29954743, 1)
+
+[node name="MainMenu" type="Control" unique_id=424316780]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ehe0")
+
+[node name="Panel" type="Panel" parent="." unique_id=663434705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ce3w2")
+
+[node name="Paddle Pitch" type="Label" parent="." unique_id=339813092]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_top = 25.0
+offset_right = 270.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 45
+text = "Paddle Pitch"
+
+[node name="MadeBy" type="Label" parent="." unique_id=2146759796]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -45.0
+offset_right = 270.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 15
+text = "Made by: lel1guy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1225022461]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -193.75
+offset_right = 576.0
+offset_bottom = 193.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayerCPU" type="Button" parent="VBoxContainer" unique_id=2142676810]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 50
+text = "Player VS CPU"
+
+[node name="PlayerPlayer" type="Button" parent="VBoxContainer" unique_id=1133721450]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 50
+text = "Player VS Player"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=325029058]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/PlayerCPU" to="." method="_on_player_cpu_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayerPlayer" to="." method="_on_player_player_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

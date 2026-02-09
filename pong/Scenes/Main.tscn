@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://bjg41m0chfocw"]
+
+[ext_resource type="Texture2D" uid="uid://cicego0clb86n" path="res://Assets/Footpong.png.png" id="1_v1gob"]
+[ext_resource type="Script" uid="uid://cbcv73kdt3l7x" path="res://Script/Main.gd" id="2_jw32o"]
+[ext_resource type="PackedScene" uid="uid://qet1tfjqc86l" path="res://Scenes/player.tscn" id="3_50glp"]
+[ext_resource type="PackedScene" uid="uid://cw8hvcfg7q5ms" path="res://Scenes/defender.tscn" id="4_vy5pj"]
+[ext_resource type="PackedScene" uid="uid://bkgsgplmdrdk4" path="res://Scenes/ball.tscn" id="5_bmxlf"]
+[ext_resource type="Script" uid="uid://dpes2x6gp8xop" path="res://Script/defender.gd" id="5_jw32o"]
+[ext_resource type="FontFile" uid="uid://dhlcrj2livg4t" path="res://Assets/PublicPixel-rv0pA.ttf" id="6_4kpch"]
+[ext_resource type="PackedScene" uid="uid://bjbn4uxeicuul" path="res://Scenes/pause_menu.tscn" id="8_50glp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1lr2"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxj5q"]
+size = Vector2(56, 648)
+
+[node name="Main" type="Sprite2D" unique_id=781252661]
+texture = ExtResource("1_v1gob")
+centered = false
+script = ExtResource("2_jw32o")
+
+[node name="Player" parent="." unique_id=2115984524 instance=ExtResource("3_50glp")]
+position = Vector2(50, 324)
+
+[node name="Defender" parent="." unique_id=982291588 instance=ExtResource("4_vy5pj")]
+position = Vector2(1082, 324)
+script = ExtResource("5_jw32o")
+
+[node name="Ball" parent="." unique_id=115472905 instance=ExtResource("5_bmxlf")]
+position = Vector2(578, 324)
+collision_mask = 3
+speed_multiplier = 1.05
+
+[node name="Borders" type="StaticBody2D" parent="." unique_id=2048419885]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Borders" unique_id=1130419451]
+position = Vector2(576, -9)
+shape = SubResource("RectangleShape2D_s1lr2")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders" unique_id=509951595]
+position = Vector2(576, 657)
+shape = SubResource("RectangleShape2D_s1lr2")
+
+[node name="GoalLeft" type="Area2D" parent="." unique_id=1797292733]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=1135665167]
+position = Vector2(-28, 324)
+shape = SubResource("RectangleShape2D_fxj5q")
+
+[node name="GoalRight" type="Area2D" parent="." unique_id=42885347]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=1166121949]
+position = Vector2(1180, 324)
+shape = SubResource("RectangleShape2D_fxj5q")
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=1752347895]
+
+[node name="PlayerScore" type="Label" parent="Hud" unique_id=1474741866]
+offset_left = 456.0
+offset_top = 5.0
+offset_right = 506.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("6_4kpch")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUScore" type="Label" parent="Hud" unique_id=2008098770]
+offset_left = 648.0
+offset_top = 5.0
+offset_right = 698.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("6_4kpch")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallTimer" type="Timer" parent="." unique_id=388389998]
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1212431680]
+
+[node name="Pause Menu" parent="CanvasLayer" unique_id=174127893 instance=ExtResource("8_50glp")]
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="GoalLeft" to="." method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="." method="_on_goal_right_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
